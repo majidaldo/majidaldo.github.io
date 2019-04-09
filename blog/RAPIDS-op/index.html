@@ -1,0 +1,144 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/style.css">
+<title> Welcome  — Majid alDosari  </title>
+<body>
+  <header>
+    <h1> Majid alDosari </h1>
+    <nav>
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        
+          <li class="active"><a href="/blog/">>Blog</a></li>
+        
+          <li><a href="/portfolio/portfolio.html">>Portfolio</a></li>
+        
+          <li><a href="/connect/">>Connect</a></li>
+        
+      </ul>
+    </nav>
+  </header>
+  <div class="page">
+    
+  
+  <div class="blog-post">
+  
+    <h2>RAPIDS for data science signals potential maturation of (big) data science computing</h2>
+  
+  <p class="meta">
+    2018-10-30
+  
+    
+    <br>
+    Tags: 
+    
+ 
+  
+  [<a href="/blog/tag/gpu/">gpu</a>]
+
+  
+  [<a href="/blog/tag/gtc/">gtc</a>]
+
+  
+  [<a href="/blog/tag/high performance computing/">high performance computing</a>]
+
+  
+  [<a href="/blog/tag/machine learning/">machine learning</a>]
+
+  
+  [<a href="/blog/tag/numpy/">numpy</a>]
+
+  
+  [<a href="/blog/tag/pandas/">pandas</a>]
+
+  
+  [<a href="/blog/tag/sklearn/">sklearn</a>]
+
+  
+  
+
+    
+  </p>
+
+  <p>The recent <a href="https://blogs.nvidia.com/blog/2018/10/10/gtc-europe-keynote-rapids-volvo-clara-ai/">RAPIDS announcement by Nvidia</a> was portrayed as 'data science on GPUs'. In my opinion, it's about the convergence of several trends in data science tools and computing that have been developing over at least 5 years. This convergence naturally materializes as 'data science on GPUs'. Nvidia pounced on the opportunity!</p>
+<p>These trends address a dream that I have as a data scientist: I'd like to use pandas and sklearn without having to think about whether the data fits on one machine or not and to use GPUs if available. I also would like to use SQL without having to think about whether the system that I'm executing on is a database. In other words, I'd like to use my preferred programming language and associated libraries without regard to the system that executes the program.</p>
+<p>What does this have to do with GPUs? You don't <em>need</em> GPUs to have such a system (<em>cough</em> Spark). But it seems like Nvidia, after it made deep learning practically possible, realized there was much more that it can <a href="https://devblogs.nvidia.com/gpu-accelerated-analytics-rapids/?ncid=em-ded-62752&amp;mkt_tok=eyJpIjoiTlRFME1UaG1ZV0pqTldWaCIsInQiOiJDMGhuaUlwdmxkajlFTTFhbmdCVExDTWhQTDV2MlwvT3ZhREsrZ2pLK2VFOVJ0RVMyNVB2cElsZnMxUTFOdjRGaWt3Mkw1OExTSnlRcGZlMGJjSFBBY21sVmhYcHVIQTR3cnJTdjk2eWRXUU9ZZitWWitzWkxjMlhXQ0hnR3RxblIifQ%3D%3D">accelerate upstream the data science process pipeline</a> and in the process of doing so, helps achieve this ideal user scenario.</p>
+<p>So to try to get an up close look at RAPIDS, I recently went to <a href="https://www.nvidia.com/en-us/gtc-dc/">GTC DC</a>. Pondering over what I learned at the conference, I've realized that RAPIDS has a place in the following trends that all lead to 'rapid' data science iteration.</p>
+<h3>The distinctions between analytical databases and data processing systems are blurring.</h3>
+<p><a href="https://github.com/szilard/benchm-databases">Spark can do SQL. Spark can do dataframe operations. Some pandas operations resemble SQL operations and vice versa</a>. Functionally, the only thing that a data processing framework needs to have in order for it to be considered an analytical database is data management. The best (only?) effort I've seen so far that tries to bridge data processing and databases from a programmer's aspect is <a href="https://docs.ibis-project.org/">Ibis</a>. For the execution aspect, executing SQL on GPU dataframes (a component of RAPIDS) is <a href="https://blog.blazingdb.com/announcing-blazingsql-a-gpu-sql-engine-for-rapids-open-source-software-from-nvidia-11e115ba7dd7">here</a>.</p>
+<h3>High-performance computing meets data science.</h3>
+<p>HPC software and hardware addresses distributed computing and accelerated computing on GPUs as well as on CPUs. So what's the problem? Well, traditionally, HPC was less concerned with performing operations over massive amounts of data that would have to flow through some I/O bus bottleneck from a disk. There was a mismatch between HPC hardware &amp; software and data science workloads.</p>
+<p>Nonetheless, today, 'deep learning' is a data science application that makes use of HPC capabilities. On the hardware side, the HPC community is more committed to building facilities that can <a href="https://www.hpcwire.com/2018/01/25/hpc-ai-two-communities-future/">support a variety of workloads</a> including machine learning and 'big data analytics'.</p>
+<h3>Data scientist tools are being pushed upstream the data science pipeline.</h3>
+<p>'Big data analytics' in the context of data science are the steps that happen before model training that often involve relatively simple operations on large amounts of data (that don't fit on one machine) such as joining, selection, filtering, cleaning, and perhaps feature generation. These tasks are usually the responsibility of databases and 'big data' processing systems like Spark.</p>
+<p>Unfortunately for data scientists, databases have rigid interfaces and are not easily programmable (SQL is not a programming language, ok?!). Spark offers decent programmability but runs on the Java VM. This is quite foreign to numerical programmers used to R, Python, C, Fortran, and now, Julia.</p>
+<p>But that didn't stop data science engineers from pushing their favorite wares into the 'big data' realm.</p>
+<p>Currently, the impressive <a href="http://docs.dask.org/en/latest/spark.html">Dask</a> library is pretty much the goto tool for easy Python-based distributed computing (which readily integrates with compiled code for execution on GPUs or CPUs). More recently however, <a href="https://github.com/ray-project/ray/issues/642">Ray has emerged as another library</a> that can be used for distributed computation which, in my opinion, offers <em>potentially</em> better integrations with RAPIDS than Dask (but that's another subject).</p>
+<p>Another interesting work, if all you care about is Tensorflow, is <a href="https://www.tensorflow.org/tfx/transform/get_started">Tensorflow Transform</a> which is a framework to fully integrate the data science pipeline covering both training and serving situations in one swoop.</p>
+<h3>Data science libraries are decoupling their interface from their execution.</h3>
+<p>It should be easy to argue that numpy, pandas, and sklearn have been successful. Unfortunately, the use of these tools is generally tied to a single CPU on a machine. Nonetheless, due to their success, their interfaces have become models to emulate for distributed data science (ok, <a href="https://pandas.pydata.org/pandas-docs/stable/indexing.html">pandas not so much</a> :/ ). For example, Ray and Dask have 'distributed pandas'. Nvidia's ML algorithms are <a href="https://github.com/rapidsai/cuml/blob/master/python/notebooks/dbscan_demo.ipynb">copying the sklearn interface</a>. As another example, frameworks used for deep learning like <a href="https://keras.io/">keras</a> and <a href="https://www.tensorflow.org/">Tensorflow</a> are just thin interfaces that talk to an execution engine.</p>
+<p>As a side benefit, this decoupling should allow one to use their favorite programming language to interact with these compute systems.</p>
+<h3>Machine learning is becoming more automated.</h3>
+<p>You can imagine that, if you structure and parameterize your machine learning pipeline, it becomes an optimization problem that would benefit greatly from  being able to execute many configurations of the pipeline in order to find the best model. See <a href="https://medium.com/georgian-impact-blog/automatic-machine-learning-aml-landscape-survey-f75c3ae3bbf2">this excellent survey on automated machine learning</a>.</p>
+<h3>Distributed machine learning workflows are being developed.</h3>
+<p>These days you can easily request a compute cluster from, say, Amazon, and be productive within about 10 minutes. Acquiring and deploying software to distributed systems is comparatively easy these days compared to just five years ago.</p>
+<p>Kubernetes has been important in allowing developers to focus more on building applications instead of managing a distributed system. Now, users shouldn't have to deal with Kubernetes directly but they can be given a 'handle' to the cluster that details the available resources provided by Kubernetes.</p>
+<p>As a result, <a href="https://www.kubeflow.org/">Kubeflow</a> was developed as a solution to manage machine learning deployment on Kubernetes. Also, <a href="http://www.pachyderm.io/">Pachyderm</a> manages data science workflows on Kubernetes.</p>
+<h3>Conclusions</h3>
+<p>While exciting, <strong>RAPIDS isn't mature yet</strong>. At the moment, RAPIDS is a set of libraries that need to be tied together to make a user-friendly experience. This is more challenging than typical software as developers have to consider, 1., distributed computing and, 2., GPU computing in addition to, 3., machine learning algorithms. I hope this added complexity doesn't reduce the number of possible contributors.</p>
+<p>Personally, I'd like to see some more top-down efforts to achieving the data scientist's dream of converged, distributed, and accelerated data science by defining some interface(s) to perform data science (sklearn has emerged as an excellent model!)*. What I'm seeing so far is more bottom-up: Nvidia implementing some algorithms, Anaconda providing Dask for distributed computations, and Arrow providing the data structures. As a user, I shouldn't have to make software choices corresponding to different hardware scenarios: single CPU, multiple CPU single machine, CPUs on multiple machines, single GPU, multiple GPUs single machine, GPUs on multiple machines, and even heterogeneous hardware situations (Is this asking for too much?!).</p>
+<p><strong>The usability of RAPIDS is critical to its success</strong>. RAPIDS is supposed to enable 'rapid' iteration. One can only rapidly iterate if the RAPIDS workflow is as easy to use as what has been developed for 'traditional' single CPU workflows minding that CPUs might be better for some cases.</p>
+<p>But even with an ideal data scientist user experience, <strong>GPU databases will still have their place as databases</strong>. However, I expect that the GPU databases will accommodate RAPIDS workflows by at least providing low-resistance data interchange with RAPIDS components via GPU dataframes.</p>
+<hr>
+<ul>
+<li>Maybe a shim can be made between a user and sklearn that intercepts calls and dispatches to distributed, possibly GPU-equipped,  systems if such a system is available and implements the requested call.</li>
+</ul>
+
+  
+  </div>
+
+
+
+<div class="comments">
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function() { this.page.identifier = "/blog/RAPIDS-op"; this.page.url = "https://majidaldo.github.io/blog/RAPIDS-op/"; };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//majid-aldosari-ds.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+    rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+</div>
+
+<div class="ga-script">
+<div id="ga-script"></div>
+<script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-77728175-1', 'auto');
+        ga('send', 'pageview');
+</script>
+</div>
+
+
+  </div>
+  <footer>
+      <center>
+        &copy; Copyright 2019 by
+        <br>
+        <img src="/sig.svg" width="150px" />
+        <br>
+        Majid alDosari.
+        <br>
+        This site was made with <a href=http://www.getlektor.com>Lektor</a>.
+      </center>
+  </footer>
+</body>

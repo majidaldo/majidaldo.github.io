@@ -1,0 +1,108 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/style.css">
+<title> Welcome  — Majid alDosari  </title>
+<body>
+  <header>
+    <h1> Majid alDosari </h1>
+    <nav>
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        
+          <li class="active"><a href="/blog/">>Blog</a></li>
+        
+          <li><a href="/portfolio/portfolio.html">>Portfolio</a></li>
+        
+          <li><a href="/connect/">>Connect</a></li>
+        
+      </ul>
+    </nav>
+  </header>
+  <div class="page">
+    
+  
+  <div class="blog-post">
+  
+    <h2>Image entropy can be used to automatically select scatter plot transparency</h2>
+  
+  <p class="meta">
+    2018-12-02
+  
+    
+    <br>
+    Tags: 
+    
+ 
+  
+  [<a href="/blog/tag/visualization/">visualization</a>]
+
+  
+  [<a href="/blog/tag/information theory/">information theory</a>]
+
+  
+  
+
+    
+  </p>
+
+  <p><strong>Problem</strong>: As a data scientist, you make scatter plots to assess visually a distribution of points. However, many times the points are too dense which can give you a wrong impression about the point distribution. So, you might adjust the transparency setting (usually called alpha) a few times. Now, let's say you change the dataset. Again, repeat adjusting the transparency.</p>
+<p><strong>Solution</strong>: Optimize the plot image entropy because it quantifies the 'variety' of color in it.</p>
+<p>Why?</p>
+<p>When you adjust the transparency, you are eyeballing a measure of image color 'variety'. I went for an information-theortic measure of 'variety'/'dispersion' as opposed to a statistical one (like standard deviation). What I like about information theory is that I can be less mindful of specific statistical distributions and models.</p>
+<p>The magic line to calculate color image entropy with scipy/numpy is:</p>
+<pre><code>entropy(histogramdd(img, bins=[arange(256)]*3)[0].flatten(), base=2)
+</code></pre>
+<p>where img is shape (width*height, 3) with 8-bit resolution for each color.</p>
+<p>The below figures show a monochromatic and color version of a data set scatter plot with alpha (a) and entropy (s) annotated at the top right. The alpha was varied which results in different entropy values. The red annotation signifies the highest entropy.</p>
+<p>I think the utility and quantification is easier to see in the monochromatic version perhaps due to it being less 'busy'. But the numbers don't lie!</p>
+<p><img src="/blog/plot-entropy/color_entropy.png" alt="color"> |  <img src="/blog/plot-entropy/mono_entropy.png" alt="mono"></p>
+<p>I'd like to package this somehow if there is interest.</p>
+
+  
+  </div>
+
+
+
+<div class="comments">
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function() { this.page.identifier = "/blog/plot-entropy"; this.page.url = "https://majidaldo.github.io/blog/plot-entropy/"; };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//majid-aldosari-ds.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+    rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+</div>
+
+<div class="ga-script">
+<div id="ga-script"></div>
+<script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-77728175-1', 'auto');
+        ga('send', 'pageview');
+</script>
+</div>
+
+
+  </div>
+  <footer>
+      <center>
+        &copy; Copyright 2019 by
+        <br>
+        <img src="/sig.svg" width="150px" />
+        <br>
+        Majid alDosari.
+        <br>
+        This site was made with <a href=http://www.getlektor.com>Lektor</a>.
+      </center>
+  </footer>
+</body>
