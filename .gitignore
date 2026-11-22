@@ -17,6 +17,7 @@ _.py
 
 # doc
 !*.md
+!*.lr
 
 
 # config
