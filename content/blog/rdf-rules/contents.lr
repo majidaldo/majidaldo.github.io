@@ -1,0 +1,29 @@
+title: RDF-Rules is a rules system on RDF data
+---
+pub_date: 2026-11-22
+---
+author: Majid alDosari
+---
+body:
+
+I recently released ['rdf-rules'](https://github.com/pnnl/rdf-rules/).
+
+This was a culmination of systemizing ['BIM2RDF'](https://github.com/pnnl/bim2rdf/)
+where the goal was to convert (very!) detailed building design data to RDF for interoperability.
+
+It's so general that I think it can be thought of as some [formal system](https://en.wikipedia.org/wiki/Formal_system).
+The logical limit of using 'rdf-rules' is that you can use a programming language (Python) to process data
+and RDF to structure it.
+
+I found this to be very satisfying as I can cast so much of data science work this way.
+After an initial data ingest, everything can become a query
+including structuring new derived data.
+I also found that it enables team productivity because the only common skill needed
+is to be able to author SPARQL queries (which could easily be AI generated these days).
+You just need one programmer to set up the system initially.
+
+---
+tags:
+rdf
+graph
+

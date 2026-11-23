@@ -1,0 +1,106 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title> Welcome  — Majid alDosari  </title>
+<body>
+  <header>
+    <h1> Majid alDosari </h1>
+    <nav>
+      <ul class="nav navbar-nav">
+        <li><a href="../../">Home</a></li>
+        
+          <li class="active"><a href="../">>Blog</a></li>
+        
+          <li><a href="../../connect/">>Connect</a></li>
+        
+      </ul>
+    </nav>
+  </header>
+  <div class="page">
+    
+  
+  <div class="blog-post">
+  
+    <h2>RDF-Rules is a rules system on RDF data</h2>
+  
+  <p class="meta">
+    2026-11-22
+  
+    
+    <br>
+    Tags: 
+    
+ 
+  
+  [<a href="../tag/rdf/">rdf</a>]
+
+  
+  [<a href="../tag/graph/">graph</a>]
+
+  
+  
+
+    
+  </p>
+
+  <p>I recently released <a href="https://github.com/pnnl/rdf-rules/">'rdf-rules'</a>.</p>
+<p>This was a culmination of systemizing <a href="https://github.com/pnnl/bim2rdf/">'BIM2RDF'</a>
+where the goal was to convert (very!) detailed building design data to RDF for interoperability.</p>
+<p>It's so general that I think it can be thought of as some <a href="https://en.wikipedia.org/wiki/Formal_system">formal system</a>.
+The logical limit of using 'rdf-rules' is that you can use a programming language (Python) to process data
+and RDF to structure it.</p>
+<p>I found this to be very satisfying as I can cast so much of data science work this way.
+After an initial data ingest, everything can become a query
+including structuring new derived data.
+I also found that it enables team productivity because the only common skill needed
+is to be able to author SPARQL queries (which could easily be AI generated these days).
+You just need one programmer to set up the system initially.</p>
+
+  
+  </div>
+
+
+
+<div class="comments">
+<div id="disqus_thread"></div>
+<script>
+  var disqus_config = function() { this.page.identifier = "/blog/rdf-rules"; this.page.url = "https://majidaldo.github.io/blog/rdf-rules/"; };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//majid-aldosari-ds.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+    rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+</div>
+
+<div class="ga-script">
+<div id="ga-script"></div>
+<script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-77728175-1', 'auto');
+        ga('send', 'pageview');
+</script>
+</div>
+
+
+  </div>
+  <footer>
+      <center>
+        &copy; Copyright 2019 by
+        <br>
+        <img src="../../sig.svg" width="150px" />
+        <br>
+        Majid alDosari.
+        <br>
+        This site was made with <a href=http://www.getlektor.com>Lektor</a>.
+      </center>
+  </footer>
+</body>
